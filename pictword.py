@@ -1,5 +1,5 @@
 # coding:utf-8
-import base64,urllib.parse,urllib.request,urllib.error
+import base64,urllib.parse,urllib.request,urllib.error,json
 
 
 access_token = '24.14d4cf2e93345ddfe663236f90aaddb1.2592000.1565819100.282335-16814012'
@@ -16,4 +16,11 @@ r.add_header('Content-Type', 'application/x-www-form-urlencoded')
 r = urllib.request.urlopen(r)
 content = r.read().decode()
 if(content):
-    print(content)
+    js = json.loads(content)
+    js = js['words_result']
+    st=''
+    for i in range(len(js)):
+        g = str(js[i])
+        st+=g[11:len(g)-2]
+        st+=" "
+    print(st)
